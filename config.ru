@@ -21,7 +21,11 @@ end
 if Builds::BUILD_CONFIG['teamCityBaseUrl']
   require 'teamcity'
   TeamCity.configure do |config|
-    config.endpoint = Builds::BUILD_CONFIG['teamCityBaseUrl'] + '/app/rest?guest=1'
+    config.endpoint = Builds::BUILD_CONFIG['teamCityBaseUrl'] + '/app/rest'
+    if ENV['TEAMCITY_USER'] != nil then
+      config.http_user = ENV['TEAMCITY_USER']
+      config.http_password = ENV['TEAMCITY_TOKEN']
+    end
   end
 end
 
