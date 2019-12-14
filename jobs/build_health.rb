@@ -3,11 +3,11 @@ FAILED = 'Failed'
 
 def api_functions
   return {
-    'Travis' => lambda { |build_id| get_travis_build_health build_id},
-    'TeamCity' => lambda { |build_id| get_teamcity_build_health build_id},
-    'Bamboo' => lambda { |build_id| get_bamboo_build_health build_id},
-    'Go' => lambda { |build_id| get_go_build_health build_id},
-    'Jenkins' => lambda { |build_id| get_jenkins_build_health build_id}
+    'Travis' => lambda { |build_id,display_name| get_travis_build_health(build_id,display_name)},
+    'TeamCity' => lambda { |build_id,display_name| get_teamcity_build_health(build_id,display_name)},
+    'Bamboo' => lambda { |build_id,display_name| get_bamboo_build_health(build_id,display_name)},
+    'Go' => lambda { |build_id,display_name| get_go_build_health(build_id,display_name)},
+    'Jenkins' => lambda { |build_id,display_name| get_jenkins_build_health(build_id,display_name)}
   }
 end
 
@@ -33,16 +33,17 @@ def calculate_health(successful_count, count)
 end
 
 def get_build_health(build)
-  api_functions[build['server']].call(build['id'])
+  api_functions[build['server']].call(build['id'],build['displayName'])
 end
 
-def get_teamcity_build_health(build_id)
+def get_teamcity_build_health(build_id,display_name)
   builds = TeamCity.builds(count: 25, buildType: build_id)
   latest_build = TeamCity.build(id: builds.first['id'])
   successful_count = builds.count { |build| build['status'] == 'SUCCESS' }
-
+  subtitle = '# ' + getBuildNumber(latest_build['number'])
   return {
-    name: latest_build['buildType']['name'],
+    name: (display_name || latest_build['buildType']['name']),
+    subtitle: subtitle,
     status: latest_build['status'] == 'SUCCESS' ? SUCCESS : FAILED,
     link: builds.first['webUrl'],
     health: calculate_health(successful_count, builds.count)
@@ -108,8 +109,8 @@ def get_bamboo_build_health(build_id)
   }
 end
 
-def get_jenkins_build_health(build_id)
-  url = "#{Builds::BUILD_CONFIG['jenkinsBaseUrl']}/job/#{build_id}/api/json?tree=builds[status,timestamp,id,result,duration,url,fullDisplayName]"
+def get_jenkins_build_health(build_id,display_name)
+  url = "#{ENV['JENKINS_BASE_URL']}/job/#{build_id}/api/json?tree=builds[status,timestamp,id,result,duration,url,fullDisplayName]"
 
   if ENV['JENKINS_USER'] != nil then
     auth = [ ENV['JENKINS_USER'], ENV['JENKINS_TOKEN'] ]
@@ -120,14 +121,22 @@ def get_jenkins_build_health(build_id)
   builds_with_status = builds.select { |build| !build['result'].nil? }
   successful_count = builds_with_status.count { |build| build['result'] == 'SUCCESS' }
   latest_build = builds_with_status.first
+  title = display_name || latest_build['fullDisplayName']
+  subtitle = '# ' + latest_build['id']
   return {
-    name: latest_build['fullDisplayName'],
+    name: title,
+    subtitle: subtitle,
     status: latest_build['result'] == 'SUCCESS' ? SUCCESS : FAILED,
     duration: latest_build['duration'] / 1000,
     link: latest_build['url'],
     health: calculate_health(successful_count, builds_with_status.count),
     time: latest_build['timestamp']
   }
+end
+
+def getBuildNumber(source) 
+  buildNumber = source.match(/\((\d+)\)/i).captures
+  return buildNumber[0]
 end
 
 SCHEDULER.every '20s' do

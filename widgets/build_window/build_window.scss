@@ -1,7 +1,8 @@
 $background-color:  #999999;
 $value-color:       #fff;
 
-$title-color:       rgba(255, 255, 255, 0.7);
+$title-color:       rgba(255, 255, 255, 1.0);
+$subtitle-color:    rgba(255, 255, 255, 0.7);
 $moreinfo-color:    rgba(255, 255, 255, 0.7);
 
 .widget-build-window {
@@ -12,6 +13,10 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
 
   .title {
     color: $title-color;
+  }
+
+  .subtitle {
+    color: $subtitle-color;
   }
 
   .value {
@@ -28,5 +33,9 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
 
   .small {
     font-size: 0.6em;
+  }
+
+  .bigger {
+    font-size: 1.5em;
   }
 }

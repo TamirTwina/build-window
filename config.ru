@@ -18,10 +18,10 @@ map Sinatra::Application.assets_prefix do
   run Sinatra::Application.sprockets
 end
 
-if Builds::BUILD_CONFIG['teamCityBaseUrl']
+if ENV['TEAMCITY_BASE_URL'] != nil then
   require 'teamcity'
   TeamCity.configure do |config|
-    config.endpoint = Builds::BUILD_CONFIG['teamCityBaseUrl'] + '/app/rest'
+    config.endpoint = ENV['TEAMCITY_BASE_URL'] + '/app/rest'
     if ENV['TEAMCITY_USER'] != nil then
       config.http_user = ENV['TEAMCITY_USER']
       config.http_password = ENV['TEAMCITY_TOKEN']

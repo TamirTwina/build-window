@@ -7,7 +7,7 @@
     {
       "id": "IOSApp_AppStoreRelease",
       "server": "TeamCity",
-      "displayName": "Houzz AppStore Release"
+      "displayName": "Houzz AppStore"
     },
     {
       "id": "IOSApp_IOSTestFlight",
@@ -22,7 +22,7 @@
     {
       "id": "19.12.15",
       "server": "Jenkins",
-      "displayName": "Houzz PlayStore Release"
+      "displayName": "Houzz PlayStore"
     },
     {
       "id": "HouzzPro",
@@ -33,6 +33,11 @@
       "id": "HouzzPro_OnCommitCiDevelop",
       "server": "TeamCity",
       "displayName": "Houzz Pro - Dev"
+    },
+    {
+      "id": "HouzzPro_HouzzProNightlyDevelopTestFlightV999",
+      "server": "TeamCity",
+      "displayName": "Houzz Pro - Nightly"
     }
   ]
 }
