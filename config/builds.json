@@ -1,12 +1,38 @@
 {
-  "bambooBaseUrl": "https://ci.openmrs.org",
-  "goBaseUrl": "https://build.go.cd",
-  "teamCityBaseUrl": "https://teamcity.jetbrains.com",
-  "jenkinsBaseUrl": "https://builds.apache.org",
-  "builds": [
-    {"id": "sinatra/sinatra", "server": "Travis"},
-    {"id": "IntelliJIdeaCe_CommunityTestsLinuxJava8", "server": "TeamCity"},
-    {"id": "Lucene-Solr-Maven-master", "server": "Jenkins"},
-    {"id": "EBOLA-EEM", "server": "Bamboo"}
+  "builds": [{
+      "id": "IOSApp_IOSDevelop",
+      "server": "TeamCity",
+      "displayName": "Houzz - Dev"
+    },
+    {
+      "id": "IOSApp_AppStoreRelease",
+      "server": "TeamCity",
+      "displayName": "Houzz AppStore Release"
+    },
+    {
+      "id": "IOSApp_IOSTestFlight",
+      "server": "TeamCity",
+      "displayName": "Houzz Nightly"
+    },
+    {
+      "id": "develop",
+      "server": "Jenkins",
+      "displayName": "Houzz - Dev"
+    },
+    {
+      "id": "19.12.15",
+      "server": "Jenkins",
+      "displayName": "Houzz PlayStore Release"
+    },
+    {
+      "id": "HouzzPro",
+      "server": "Jenkins",
+      "displayName": "Houzz Pro - Dev"
+    },
+    {
+      "id": "HouzzPro_OnCommitCiDevelop",
+      "server": "TeamCity",
+      "displayName": "Houzz Pro - Dev"
+    }
   ]
 }
