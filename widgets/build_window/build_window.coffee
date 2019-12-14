@@ -13,11 +13,11 @@ class Dashing.BuildWindow extends Dashing.Widget
 
   @accessor 'image', ->
     health = @get('health')
-    if (health >= 80) then 'assets/health-80plus.svg'
-    else if (health >= 60) then 'assets/health-60to79.svg'
-    else if (health >= 40) then 'assets/health-40to59.svg'
-    else if (health >= 20) then 'assets/health-20to39.svg'
-    else 'assets/health-00to19.svg'
+    if (health >= 80) then 'assets/status-80plus.png'
+    else if (health >= 60) then 'assets/status-60to79.png'
+    else if (health >= 40) then 'assets/status-40to59.png'
+    else if (health >= 20) then 'assets/status-20to39.png'
+    else 'assets/status-00to19.png'
 
   @accessor 'show-health', ->
     @get('health') >= 0
