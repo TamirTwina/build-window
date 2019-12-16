@@ -27,17 +27,20 @@
     {
       "id": "HouzzPro",
       "server": "Jenkins",
-      "displayName": "Houzz Pro - Dev"
+      "displayName": "Houzz Pro - Dev",
+      "theme": "pro"
     },
     {
       "id": "HouzzPro_OnCommitCiDevelop",
       "server": "TeamCity",
-      "displayName": "Houzz Pro - Dev"
+      "displayName": "Houzz Pro - Dev",
+      "theme": "pro"
     },
     {
       "id": "HouzzPro_HouzzProNightlyDevelopTestFlightV999",
       "server": "TeamCity",
-      "displayName": "Houzz Pro - Nightly"
+      "displayName": "Houzz Pro - Nightly",
+      "theme": "pro"
     }
   ]
 }

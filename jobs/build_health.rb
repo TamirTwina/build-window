@@ -3,11 +3,11 @@ FAILED = 'Failed'
 
 def api_functions
   return {
-    'Travis' => lambda { |build_id,display_name| get_travis_build_health(build_id,display_name)},
-    'TeamCity' => lambda { |build_id,display_name| get_teamcity_build_health(build_id,display_name)},
-    'Bamboo' => lambda { |build_id,display_name| get_bamboo_build_health(build_id,display_name)},
-    'Go' => lambda { |build_id,display_name| get_go_build_health(build_id,display_name)},
-    'Jenkins' => lambda { |build_id,display_name| get_jenkins_build_health(build_id,display_name)}
+    'Travis' => lambda { |build_id,display_name,theme| get_travis_build_health(build_id,display_name,theme)},
+    'TeamCity' => lambda { |build_id,display_name,theme| get_teamcity_build_health(build_id,display_name,theme)},
+    'Bamboo' => lambda { |build_id,display_name,theme| get_bamboo_build_health(build_id,display_name,theme)},
+    'Go' => lambda { |build_id,display_name,theme| get_go_build_health(build_id,display_name,theme)},
+    'Jenkins' => lambda { |build_id,display_name,theme| get_jenkins_build_health(build_id,display_name,theme)}
   }
 end
 
@@ -33,10 +33,10 @@ def calculate_health(successful_count, count)
 end
 
 def get_build_health(build)
-  api_functions[build['server']].call(build['id'],build['displayName'])
+  api_functions[build['server']].call(build['id'],build['displayName'],build['theme'])
 end
 
-def get_teamcity_build_health(build_id,display_name)
+def get_teamcity_build_health(build_id,display_name,theme)
   builds = TeamCity.builds(count: 25, buildType: build_id)
   latest_build = TeamCity.build(id: builds.first['id'])
   successful_count = builds.count { |build| build['status'] == 'SUCCESS' }
@@ -45,12 +45,13 @@ def get_teamcity_build_health(build_id,display_name)
     name: (display_name || latest_build['buildType']['name']),
     subtitle: subtitle,
     status: latest_build['status'] == 'SUCCESS' ? SUCCESS : FAILED,
+    theme: theme,
     link: builds.first['webUrl'],
     health: calculate_health(successful_count, builds.count)
   }
 end
 
-def get_travis_build_health(build_id)
+def get_travis_build_health(build_id,display_name,theme)
   url = "https://api.travis-ci.org/repos/#{build_id}/builds?event_type=push"
   results = get_url url
   successful_count = results.count { |result| result['result'] == 0 }
@@ -59,6 +60,7 @@ def get_travis_build_health(build_id)
   return {
     name: build_id,
     status: latest_build['result'] == 0 ? SUCCESS : FAILED,
+    theme: theme,
     duration: latest_build['duration'],
     link: "https://travis-ci.org/#{build_id}/builds/#{latest_build['id']}",
     health: calculate_health(successful_count, results.count),
@@ -70,7 +72,7 @@ def get_go_pipeline_status(pipeline)
   return pipeline['stages'].index { |s| s['result'] == 'Failed' } == nil ? SUCCESS : FAILED
 end
 
-def get_go_build_health(build_id)
+def get_go_build_health(build_id,display_name,theme)
   url = "#{Builds::BUILD_CONFIG['goBaseUrl']}/go/api/pipelines/#{build_id}/history"
 
   if ENV['GO_USER'] != nil then
@@ -86,12 +88,13 @@ def get_go_build_health(build_id)
   return {
     name: latest_pipeline['name'],
     status: get_go_pipeline_status(latest_pipeline),
+    theme: theme,
     link: "#{Builds::BUILD_CONFIG['goBaseUrl']}/go/tab/pipeline/history/#{build_id}",
     health: calculate_health(successful_count, results.count),
   }
 end
 
-def get_bamboo_build_health(build_id)
+def get_bamboo_build_health(build_id,display_name,theme)
   url = "#{Builds::BUILD_CONFIG['bambooBaseUrl']}/rest/api/latest/result/#{build_id}.json?expand=results.result"
   build_info = get_url url
 
@@ -102,6 +105,7 @@ def get_bamboo_build_health(build_id)
   return {
     name: latest_build['plan']['shortName'],
     status: latest_build['state'] == 'Successful' ? SUCCESS : FAILED,
+    theme: theme,
     duration: latest_build['buildDurationDescription'],
     link: "#{Builds::BUILD_CONFIG['bambooBaseUrl']}/browse/#{latest_build['key']}",
     health: calculate_health(successful_count, results.count),
@@ -109,7 +113,7 @@ def get_bamboo_build_health(build_id)
   }
 end
 
-def get_jenkins_build_health(build_id,display_name)
+def get_jenkins_build_health(build_id,display_name,theme)
   url = "#{ENV['JENKINS_BASE_URL']}/job/#{build_id}/api/json?tree=builds[status,timestamp,id,result,duration,url,fullDisplayName]"
 
   if ENV['JENKINS_USER'] != nil then
@@ -127,6 +131,7 @@ def get_jenkins_build_health(build_id,display_name)
     name: title,
     subtitle: subtitle,
     status: latest_build['result'] == 'SUCCESS' ? SUCCESS : FAILED,
+    theme: theme,
     duration: latest_build['duration'] / 1000,
     link: latest_build['url'],
     health: calculate_health(successful_count, builds_with_status.count),
