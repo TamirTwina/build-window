@@ -17,7 +17,10 @@ class Dashing.BuildWindow extends Dashing.Widget
 
   @accessor 'image', ->
     health = @get('health')
-    if (health >= 80) then 'assets/status-80plus.png'
+    status = @get('status')
+    if (health >= 80) 
+      if (status == 'Successful') then 'assets/status-80plus.png'
+      else 'assets/build_failed_health_ok.png'
     else if (health >= 60) then 'assets/status-60to79.png'
     else if (health >= 40) then 'assets/status-40to59.png'
     else if (health >= 20) then 'assets/status-20to39.png'
