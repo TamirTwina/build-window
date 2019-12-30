@@ -41,6 +41,12 @@
       "server": "TeamCity",
       "displayName": "Houzz Pro - Nightly",
       "theme": "pro"
+    },
+    {
+      "id": "HouzzPro_HouzzProAppStoreRelease",
+      "server": "TeamCity",
+      "displayName": "Houzz Pro - v1.0",
+      "theme": "pro"
     }
   ]
 }
