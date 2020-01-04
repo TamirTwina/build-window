@@ -144,8 +144,8 @@ def getBuildNumber(source)
   return buildNumber[0]
 end
 
-# SCHEDULER.every '20s' do
-#   Config::BUILD_LIST.each do |build|
-#     send_event(build['id'], get_build_health(build))
-#   end
-# end
+SCHEDULER.every '20s' do
+  Config::BUILD_LIST.each do |build|
+    send_event(build['id'], get_build_health(build))
+  end
+end
