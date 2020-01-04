@@ -73,7 +73,7 @@ def get_go_pipeline_status(pipeline)
 end
 
 def get_go_build_health(build_id,display_name,theme)
-  url = "#{Builds::BUILD_CONFIG['goBaseUrl']}/go/api/pipelines/#{build_id}/history"
+  url = "#{Config::BUILD_CONFIG['goBaseUrl']}/go/api/pipelines/#{build_id}/history"
 
   if ENV['GO_USER'] != nil then
     auth = [ ENV['GO_USER'], ENV['GO_PASSWORD'] ]
@@ -89,13 +89,13 @@ def get_go_build_health(build_id,display_name,theme)
     name: latest_pipeline['name'],
     status: get_go_pipeline_status(latest_pipeline),
     theme: theme,
-    link: "#{Builds::BUILD_CONFIG['goBaseUrl']}/go/tab/pipeline/history/#{build_id}",
+    link: "#{Config::BUILD_CONFIG['goBaseUrl']}/go/tab/pipeline/history/#{build_id}",
     health: calculate_health(successful_count, results.count),
   }
 end
 
 def get_bamboo_build_health(build_id,display_name,theme)
-  url = "#{Builds::BUILD_CONFIG['bambooBaseUrl']}/rest/api/latest/result/#{build_id}.json?expand=results.result"
+  url = "#{Config::BUILD_CONFIG['bambooBaseUrl']}/rest/api/latest/result/#{build_id}.json?expand=results.result"
   build_info = get_url url
 
   results = build_info['results']['result']
@@ -107,7 +107,7 @@ def get_bamboo_build_health(build_id,display_name,theme)
     status: latest_build['state'] == 'Successful' ? SUCCESS : FAILED,
     theme: theme,
     duration: latest_build['buildDurationDescription'],
-    link: "#{Builds::BUILD_CONFIG['bambooBaseUrl']}/browse/#{latest_build['key']}",
+    link: "#{Config::BUILD_CONFIG['bambooBaseUrl']}/browse/#{latest_build['key']}",
     health: calculate_health(successful_count, results.count),
     time: latest_build['buildRelativeTime']
   }
@@ -144,8 +144,8 @@ def getBuildNumber(source)
   return buildNumber[0]
 end
 
-SCHEDULER.every '20s' do
-  Builds::BUILD_LIST.each do |build|
-    send_event(build['id'], get_build_health(build))
-  end
-end
+# SCHEDULER.every '20s' do
+#   Config::BUILD_LIST.each do |build|
+#     send_event(build['id'], get_build_health(build))
+#   end
+# end

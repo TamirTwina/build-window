@@ -18,7 +18,7 @@
         num_cols = 12
         widget_size = 3
     %>
-    <% Builds::BUILD_LIST.each_with_index do |build, index| %>
+    <% Config::BUILD_LIST.each_with_index do |build, index| %>
     <% build_num = index + 1 %>
     <li data-row="<%= build_num % num_cols == 0 ? build_num / num_cols + 1 : build_num / num_cols + 2 %>"
       data-col="<%= build_num % num_cols == 0 ? num_cols : build_num % num_cols %>" data-sizex="<%= widget_size %>"

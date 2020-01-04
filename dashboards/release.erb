@@ -1,0 +1,26 @@
+<script type='text/javascript'>
+ $(function() {
+   Dashing.gridsterLayout('[{"col":1,"row":1,"size_x":12,"size_y":1},{"col":7,"row":2,"size_x":4,"size_y":4},{"col":7,"row":6,"size_x":4,"size_y":4},{"col":3,"row":2,"size_x":4,"size_y":4},{"col":3,"row":6,"size_x":4,"size_y":4}]')
+ });
+ </script>
+<% content_for :title do %>Mobile CI<% end %>
+<div class="gridster">
+  <ul>
+    <li data-row="1" data-col="1" data-sizex="12" data-sizey="1">
+      <div data-view="BigImage" data-image="https://www.dropbox.com/s/5vw7bt6yo898lnv/Houzz_Pro_wide.png?dl=1"
+        style="background-color:transparent;" data-max="true"></div>
+    </li>
+    <li data-row="2" data-col="1" data-sizex="4" data-sizey="4">
+        <div data-view="SprintProgress" data-id="Houzz_Pro_Android_v1"></div>
+    </li>
+    <li data-row="4" data-col="1" data-sizex="4" data-sizey="4">
+        <div data-id="Houzz_Pro_Android_v1-doughnutchart" data-view ="DoughnutChart" data-left-margin="5" data-top-margin="10"></div>
+    </li>
+    <li data-row="2" data-col="4" data-sizex="4" data-sizey="4">
+        <div data-view="SprintProgress" data-id="Houzz_Pro_iOS_v1"></div>
+    </li>
+    <li data-row="4" data-col="4" data-sizex="4" data-sizey="4">
+        <div data-id="Houzz_Pro_iOS_v1-doughnutchart" data-view ="DoughnutChart" data-left-margin="5" data-top-margin="10"></div>
+    </li>
+  </ul>
+</div>

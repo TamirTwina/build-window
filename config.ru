@@ -2,9 +2,13 @@ require 'dotenv'
 Dotenv.load
 
 require 'dashing'
+require 'logger'
 
 configure do
   set :auth_token, 'YOUR_AUTH_TOKEN'
+  
+  $logger = Logger.new(STDOUT)
+  $logger.level = Logger::INFO
 
   helpers do
     def protected!
