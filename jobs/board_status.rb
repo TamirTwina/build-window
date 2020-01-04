@@ -78,12 +78,12 @@ end
 
 def get_status(url) 
   tasks = get_all_tasks(url)
-
-  unbreak_now = tasks.select { |task| task['fields']['priority']['value'] == 100 }
-  needs_triage = tasks.select { |task| task['fields']['priority']['value'] == 90 }
-  high = tasks.select { |task| task['fields']['priority']['value'] == 80 }
-  normal = tasks.select { |task| task['fields']['priority']['value'] == 50 }
-  low = tasks.select { |task| task['fields']['priority']['value'] < 50 }
+  remaining_tasks = tasks.select { |task| !["accepted", "resolved"].include?(task['fields']['status']['value'])}
+  unbreak_now = remaining_tasks.select { |task| task['fields']['priority']['value'] == 100 }
+  needs_triage = remaining_tasks.select { |task| task['fields']['priority']['value'] == 90 }
+  high = remaining_tasks.select { |task| task['fields']['priority']['value'] == 80 }
+  normal = remaining_tasks.select { |task| task['fields']['priority']['value'] == 50 }
+  low = remaining_tasks.select { |task| task['fields']['priority']['value'] < 50 }
   done = tasks.select { |task| ["accepted", "resolved"].include?(task['fields']['status']['value'])}
   status = BoardStatus.new(unbreak_now,needs_triage,high,normal,low,done,tasks)
   return status
