@@ -43,9 +43,9 @@
       "theme": "pro"
     },
     {
-      "id": "HouzzPro_OnCommitCiDevelop",
+      "id": "HouzzPro_HouzzProOnCommitCiRelease",
       "server": "TeamCity",
-      "displayName": "Houzz Pro - Dev",
+      "displayName": "Houzz Pro - Release",
       "theme": "pro"
     },
     {
