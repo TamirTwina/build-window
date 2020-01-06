@@ -39,7 +39,7 @@
     {
       "id": "HouzzPro_Release",
       "server": "Jenkins",
-      "displayName": "Houzz Pro - Dev",
+      "displayName": "Houzz Pro - Release",
       "theme": "pro"
     },
     {
@@ -49,15 +49,9 @@
       "theme": "pro"
     },
     {
-      "id": "HouzzPro_HouzzProNightlyDevelopTestFlightV999",
-      "server": "TeamCity",
-      "displayName": "Houzz Pro - Nightly",
-      "theme": "pro"
-    },
-    {
       "id": "HouzzPro_HouzzProAppStoreRelease",
       "server": "TeamCity",
-      "displayName": "Houzz Pro - v1.0",
+      "displayName": "HP - AppStore",
       "theme": "pro"
     }
   ]
