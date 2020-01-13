@@ -109,14 +109,17 @@ end
 def progress_report(workboard,sprint_status)
   closed_points = sprint_status.done_tasks.size || 0
   total_points = sprint_status.all_tasks.size || 0 
+  to_verify = sprint_status.tasks_to_verify.size || 0
   if total_points == 0 then
       percentage = 0
       moreinfo = "No sprint currently in progress"
+      to_verify = "All done :)"
   else
       percentage = ((closed_points.to_f/total_points.to_f )*100.0).ceil.to_i
       moreinfo = "#{closed_points.to_i} / #{total_points.to_i}"
+      to_verify_message = "#{to_verify.to_i} tickets to verify"
   end
-  send_event(workboard['id'], { title: workboard['title'], min: 0, value: percentage, max: 100, moreinfo: moreinfo })
+  send_event(workboard['id'], { title: workboard['title'], min: 0, value: percentage, max: 100, moreinfo: moreinfo, to_verify: to_verify_message })
 end
 
 def tasks_distribution_report(workboard,sprint_status)
