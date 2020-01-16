@@ -2,13 +2,13 @@
   "boards": [
     {
       "id": "Houzz_Pro_iOS_v1",
-      "url": "https://cr.houzz.net/api/maniphest.search?constraints[projects][0]=houzz_pro_1.0_release_-_ios&api.token=api-xvdsg5qpqbsrppd6rvykbegoidbz",
-      "title": "Houzz Pro v1.0 - iOS"
+      "url": "https://cr.houzz.net/api/maniphest.search?constraints[projects][0]=houzz_pro_1.1_release_-_ios&api.token=api-xvdsg5qpqbsrppd6rvykbegoidbz",
+      "title": "Houzz Pro v1.1 - iOS"
     },
     {
       "id": "Houzz_Pro_Android_v1",
-      "url": "https://cr.houzz.net/api/maniphest.search?constraints[projects][0]=houzz_pro_1.0_release_-_android&api.token=api-xvdsg5qpqbsrppd6rvykbegoidbz",
-      "title": "Houzz Pro v1.0 - Android"
+      "url": "https://cr.houzz.net/api/maniphest.search?constraints[projects][0]=houzz_pro_1.1_release_-_android&api.token=api-xvdsg5qpqbsrppd6rvykbegoidbz",
+      "title": "Houzz Pro v1.1 - Android"
     }
   ],
   "builds": [{
