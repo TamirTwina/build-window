@@ -17,6 +17,8 @@ $title-position:    top;
 
   background-color: $background-color;
 
+  border-radius: 15px;
+
   .title {
     @if $title-position == 'top' {
       left: 0;

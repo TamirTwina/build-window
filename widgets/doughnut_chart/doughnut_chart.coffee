@@ -35,7 +35,12 @@ class Dashing.DoughnutChart extends Dashing.Widget
         responsive: true
         maintainAspectRatio: true
         legend: {
-          display: true
+          display: true,
+          fullWidth: false,
+          position: 'bottom',
+          labels: {
+           boxWidth: 20
+          }
         }
       }, @get('options'))
     });

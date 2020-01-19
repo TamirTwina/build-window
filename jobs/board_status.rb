@@ -141,7 +141,9 @@ def tasks_distribution_report(workboard,sprint_status)
     '#f1c40f'
     ]
   },]
-  options = { }
+  options = {
+     borderWidth: 0
+   }
 
   send_event(workboard['id']+'-doughnutchart', { labels: labels_with_numbers(labels,sprint_status), datasets: data, options: options })
 end

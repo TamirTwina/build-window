@@ -1,14 +1,24 @@
 {
   "boards": [
     {
-      "id": "Houzz_Pro_iOS_v1",
-      "url": "https://cr.houzz.net/api/maniphest.search?constraints[projects][0]=houzz_pro_1.1_release_-_ios&api.token=api-xvdsg5qpqbsrppd6rvykbegoidbz",
-      "title": "Houzz Pro v1.1 - iOS"
+      "id": "Houzz_Consumer_iOS_Release",
+      "url": "https://cr.houzz.net/api/maniphest.search?constraints[projects][0]=ios_release_20.1.26&api.token=api-xvdsg5qpqbsrppd6rvykbegoidbz",
+      "title": "Consumer v20.1.26 - iOS"
     },
     {
-      "id": "Houzz_Pro_Android_v1",
+      "id": "Houzz_Consumer_Android_Release",
+      "url": "https://cr.houzz.net/api/maniphest.search?constraints[projects][0]=android_release_20.1.26&api.token=api-xvdsg5qpqbsrppd6rvykbegoidbz",
+      "title": "Consumer v20.1.26 - Android"
+    },
+    {
+      "id": "Houzz_Pro_iOS_Release",
+      "url": "https://cr.houzz.net/api/maniphest.search?constraints[projects][0]=houzz_pro_1.1_release_-_ios&api.token=api-xvdsg5qpqbsrppd6rvykbegoidbz",
+      "title": "Pro v1.1 - iOS"
+    },
+    {
+      "id": "Houzz_Pro_Android_Release",
       "url": "https://cr.houzz.net/api/maniphest.search?constraints[projects][0]=houzz_pro_1.1_release_-_android&api.token=api-xvdsg5qpqbsrppd6rvykbegoidbz",
-      "title": "Houzz Pro v1.1 - Android"
+      "title": "Pro v1.1 - Android"
     }
   ],
   "builds": [{
