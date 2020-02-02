@@ -2,13 +2,13 @@
   "boards": [
     {
       "id": "Houzz_Consumer_iOS_Release",
-      "url": "https://cr.houzz.net/api/maniphest.search?constraints[projects][0]=ios_release_20.1.26&api.token=api-xvdsg5qpqbsrppd6rvykbegoidbz",
-      "title": "Consumer v20.1.26 - iOS"
+      "url": "https://cr.houzz.net/api/maniphest.search?constraints[projects][0]=ios_release_20.2.9&api.token=api-xvdsg5qpqbsrppd6rvykbegoidbz",
+      "title": "Consumer v20.2.9 - iOS"
     },
     {
       "id": "Houzz_Consumer_Android_Release",
-      "url": "https://cr.houzz.net/api/maniphest.search?constraints[projects][0]=android_release_20.1.26&api.token=api-xvdsg5qpqbsrppd6rvykbegoidbz",
-      "title": "Consumer v20.1.26 - Android"
+      "url": "https://cr.houzz.net/api/maniphest.search?constraints[projects][0]=android_release_20.2.9&api.token=api-xvdsg5qpqbsrppd6rvykbegoidbz",
+      "title": "Consumer v20.2.9 - Android"
     },
     {
       "id": "Houzz_Pro_iOS_Release",
@@ -53,16 +53,22 @@
       "theme": "pro"
     },
     {
-      "id": "HouzzPro_HouzzProOnCommitCiRelease",
+      "id": "HouzzPro_OnCommitCiDevelop",
       "server": "TeamCity",
-      "displayName": "Houzz Pro - Release",
+      "displayName": "Houzz Pro - Dev",
       "theme": "pro"
     },
     {
       "id": "HouzzPro_HouzzProAppStoreRelease",
       "server": "TeamCity",
-      "displayName": "HP - AppStore",
+      "displayName": "Houzz Pro - AppStore",
       "theme": "pro"
-    }
+    },
+    {
+      "id": "HouzzPro_HouzzProNightlyDevelopTestFlightV999",
+      "server": "TeamCity",
+      "displayName": "Houzz Pro - Nightly",
+      "theme": "pro"
+    },
   ]
 }
